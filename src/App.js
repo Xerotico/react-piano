@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PianoKeyboard from './components/PianoKeyboard';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PianoKeyboard
+        keysConfig={[
+          { type: 'white', soundFrequency: 261.6 },
+          { type: 'black', soundFrequency: 277.2 },
+          { type: 'white', soundFrequency: 293.7 },
+          { type: 'black', soundFrequency: 311.1 },
+          { type: 'white', soundFrequency: 329.6 },
+          { type: 'white', soundFrequency: 349.2 },
+          { type: 'black', soundFrequency: 370.0 },
+          { type: 'white', soundFrequency: 392.0 },
+          { type: 'black', soundFrequency: 415.3 },
+          { type: 'white', soundFrequency: 440.0 },
+          { type: 'black', soundFrequency: 466.2 },
+          { type: 'white', soundFrequency: 493.9 },
+        ]}
+      />
     </div>
   );
 }
