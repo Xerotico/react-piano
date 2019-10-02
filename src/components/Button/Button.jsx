@@ -8,7 +8,19 @@ class Button extends React.PureComponent {
     super(props);
 
     this.audioContext = new AudioContext();
-    this.createOscillator();
+    this.audioOscillator = null;
+  }
+
+  componentDidUpdate() {
+    if (this.props.playSound) {
+      this.playSound();
+      return;
+    }
+    this.muteSound();
+  }
+
+  componentWillUnmount() {
+    this.muteSound();
   }
 
   createOscillator() {
@@ -25,19 +37,40 @@ class Button extends React.PureComponent {
   playSound = () => {
     if (this.audioOscillator === null) {
       this.createOscillator();
+      this.audioOscillator.frequency.value = this.props.soundFrequency;
+      this.audioOscillator.start();
     }
-    this.audioOscillator.frequency.value = this.props.soundFrequency;
-    this.audioOscillator.start();
   };
 
   muteSound = () => {
-    this.audioOscillator.stop();
-    this.destroyOscillator();
+    if (this.audioOscillator !== null) {
+      this.audioOscillator.stop();
+      this.destroyOscillator();
+    }
   };
+
+  getPropsMixin() {
+    return {
+      onMouseDown: this.props.onKeyDown,
+      onMouseUp: this.props.onKeyUp,
+      onMouseLeave: this.props.onKeyUp,
+    }
+  }
 }
 
+Button.defaultProps = {
+  playSound: false,
+  keyName: '',
+  onKeyDown: () => {},
+  onKeyUp: () => {},
+};
+
 Button.propTypes = {
+  playSound: PropTypes.bool,
+  keyName: PropTypes.string,
   soundFrequency: PropTypes.number.isRequired,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
 };
 
 export default Button;

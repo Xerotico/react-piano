@@ -1,14 +1,25 @@
 .piano-button {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 10px;
+  box-sizing: border-box;
+
   background: white;
   opacity: 100%;
   border: 1px solid #171717;
-  width: 20px;
+  cursor: pointer;
+
+  width: 25px;
   height: 100%;
-  transition: opacity .3s;
+
+  transition: all .1s;
+
+  box-shadow: 0 5px 5px #393939;
 }
 
-.piano-button:active {
-  opacity: 80%;
+.piano-button__pressed {
+  font-weight: bolder !important;
+  box-shadow: 0 2px 2px #393939;
 }
-
-
